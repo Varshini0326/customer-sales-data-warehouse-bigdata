@@ -1,36 +1,16 @@
-# Customer Sales Data Warehouse & Big Data Project – Blue Sky Online Retailer
-
-**Dimensional Data Warehouse and Big Data Analysis project for Blue Sky Online Retailer.**  
-Includes SQL Server implementation, ETL, and placeholders for Hadoop/Hive/Pig analysis.  
-
----
+# Customer Sales Data Warehouse & Big Data Project - Blue Sky Online Retailer
 
 ## Project Description
 
-**Blue Sky Online Retailer** is a consumer electronics retailer operating across the UK and Europe, offering over 500 brands through multiple channels such as Amazon, eBay, Tesco, and its own website.  
+**Blue Sky Online Retailer** is a consumer electronics retailer operating across the UK and Europe, offering over 500 brands through multiple channels like Amazon, eBay, Tesco, and its own website.  
 
-The company faced challenges in **customer data management**, including:
+The company faced challenges in customer data management, including:
 
 - Fragmented customer information across Excel, CSV, and text files  
 - Limited ability to analyze customer behavior and preferences  
 - Lack of integration across multiple sales channels  
 
-The purpose of this project is to design and implement a **data warehouse** to consolidate customer, sales, payment, and channel data, enabling better analysis, customer relationship management, and sales optimization. Additionally, data is migrated to **Apache Hadoop** for large-scale processing, enabling the use of **Hive** and **Pig** for big data analytics.
-
----
-
-## Table of Contents
-
-1. [Project Overview](#project-overview)  
-2. [Business Requirements](#business-requirements)  
-3. [Data Sources](#data-sources)  
-4. [Dimensional Modeling](#dimensional-modeling)  
-5. [Star Schema](#star-schema)  
-6. [ETL & Big Data Integration](#etl--big-data-integration)  
-7. [Sample SQL Queries](#sample-sql-queries)  
-8. [Repository Structure](#repository-structure)  
-9. [Author](#author)  
-10. [License](#license)  
+The purpose of this project is to design and implement a **data warehouse** to consolidate customer, sales, payment, and channel data, enabling **better analysis, customer relationship management, and sales optimization**. Additionally, data is migrated to **Apache Hadoop** for large-scale processing, enabling the use of **Hive** and **Pig** for big data analytics.
 
 ---
 
@@ -45,10 +25,10 @@ The purpose of this project is to design and implement a **data warehouse** to c
 
 ## Business Requirements
 
-- Maintain a **customer database** with demographic and transactional details  
-- Analyze purchase history based on demographics: age group, income, marital status, postcode, city, country  
-- Identify **customer preferences** for selling channels and payment methods  
-- Determine the **most profitable customers** over different periods (month, quarter, year)  
+1. Maintain a **customer database** with demographic and transactional details  
+2. Analyze purchase history based on demographics: age group, income, marital status, postcode, city, country  
+3. Identify **customer preferences** for selling channels and payment methods  
+4. Determine the **most profitable customers** over different periods (month, quarter, year)  
 
 **Challenges:**
 
@@ -92,73 +72,29 @@ The purpose of this project is to design and implement a **data warehouse** to c
 
 ## Star Schema
 
-Fact tables are linked to all dimension tables using foreign keys, supporting aggregation for customer sales, profitability, and channel performance.  
+![Star Schema](https://github.com/Varshini0326/customer-sales-data-warehouse-bigdata/blob/main/Schema.png)  
 
-![Star Schema](docs/schema_diagram.png)
+Fact tables are linked to all dimension tables using foreign keys, supporting aggregation for customer sales, profitability, and channel performance.
 
 ---
 
 ## ETL & Big Data Integration
 
-**SQL Server ETL:** Cleansed and loaded data from staging to dimension and fact tables  
-
-**Big Data Migration:**  
-
-- Exported tables to CSV for Hadoop ingestion  
-- Used **HDFS** for distributed storage  
-- **Hive** for SQL-like analysis, **Pig** for data transformation  
+- **SQL Server ETL:** Cleansed and loaded data from staging to dimension and fact tables  
+- **Big Data Migration:**  
+  - Exported tables to CSV for Hadoop ingestion  
+  - Used **HDFS** for distributed storage  
+  - **Hive** for SQL-like analysis, **Pig** for data transformation  
 
 ---
 
-## Sample SQL Queries
+## License
 
-```sql
--- Total Sales by Customer
-SELECT cd.FirstName, cd.LastName, SUM(fact.TotalRetailPrice) AS TotalSales
-FROM dbo.CustomerSalesTransactionFactTable fact
-JOIN dbo.CustomerDimension cd ON fact.CustomerKey = cd.CustomerKey
-GROUP BY cd.FirstName, cd.LastName
-ORDER BY TotalSales DESC;
+This project is licensed under the [MIT License](LICENSE).
 
--- Sales by Channel
-SELECT sc.SellingChannelName, SUM(fact.TotalRetailPrice) AS TotalSales
-FROM dbo.CustomerSalesTransactionFactTable fact
-JOIN dbo.SellingChannelDimension sc ON fact.SellingChannelKey = sc.SellingChannelKey
-GROUP BY sc.SellingChannelName
-ORDER BY TotalSales DESC;
+## Author
 
--- Profitability by Month
-SELECT dd.CalendarYear, dd.MonthOfYear, SUM(fact.Profit) AS MonthlyProfit
-FROM dbo.CustomerSalesTransactionFactTable fact
-JOIN dbo.DatesDimension dd ON fact.FullDate = dd.FullDate
-GROUP BY dd.CalendarYear, dd.MonthOfYear
-ORDER BY dd.CalendarYear, dd.MonthOfYear;
+👩‍💻 **Varshini Konduru**
 
-Repository Structure
-customer-sales-data-warehouse-bigdata/
-│
-├── SQL/
-│   ├── master_sql_script.sql
-│   └── sample_queries.sql
-│
-├── Data/
-│   ├── staging/
-│   └── processed/
-│
-├── docs/
-│   └── schema.png
-│
-├── requirements.txt
-└── README.md
-
-Author
-
-👩‍💻 Varshini Konduru
-
-GitHub: https://github.com/Varshini0326
-
-LinkedIn: https://www.linkedin.com/in/varshini-konduru
-
-License
-
-This project is licensed under the MIT License
+- [GitHub](https://github.com/Varshini0326)  
+- [LinkedIn](https://www.linkedin.com/in/varshini-konduru-310767195/)

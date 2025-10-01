@@ -1,4 +1,4 @@
-# Customer Sales Data Warehouse & Big Data Project - Blue Sky Online Retailer
+# Customer Sales Data Warehouse & Big Data - Blue Sky Online Retailer
 
 ## Project Description
 
